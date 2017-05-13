@@ -1,0 +1,6 @@
+plugin:
+    name: 'timfoerster.newspdf::lang.plugin.name'
+    description: 'timfoerster.newspdf::lang.plugin.description'
+    author: 'Tim Foerster'
+    icon: oc-icon-newspaper-o
+    homepage: ''
