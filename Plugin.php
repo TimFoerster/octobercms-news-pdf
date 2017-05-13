@@ -6,6 +6,7 @@ use Event;
 use TimFoerster\NewsPdf\Models\NewsPdf;
 use Storage;
 use System\Models\File;
+use Backend;
 
 class Plugin extends PluginBase
 {
