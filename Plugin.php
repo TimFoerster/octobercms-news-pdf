@@ -43,10 +43,11 @@ class Plugin extends PluginBase
                 return ;
             };
 
-            $path = storage_path('app/media/newsletter');
+            $model->template_code = $news->newsPdf->template_code;
+            $path = 'media/newsletter';
             Storage::makeDirectory($path);
 
-            $path = $path.'/'.$news->slug.'.pdf';
+            $path = storage_path("app/".$path.'/'.$news->slug.'.pdf');
 
             $model->generatePdf()->save($path);
 
