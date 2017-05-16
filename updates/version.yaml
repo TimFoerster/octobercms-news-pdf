@@ -1,5 +1,5 @@
 1.0.1:
+    - 'Initialize plugin'
     - builder_table_create_timfoerster_newspdf_newspdf.php
-    - 'Initialize plugin.'
 1.0.2:
     - 'Adding plugin dependencies'
