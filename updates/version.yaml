@@ -3,3 +3,6 @@
     - 'Initialize plugin.'
 1.0.2:
     - 'Adding plugin dependencies'
+1.0.3:
+    - 'Updated table timfoerster_newspdf_newspdf'
+    - builder_table_update_timfoerster_newspdf_newspdf.php
