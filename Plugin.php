@@ -26,6 +26,11 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Indikator.News', 'Renatio.DynamicPDF'];
+
     public function boot()
     {
         // extend Posts
