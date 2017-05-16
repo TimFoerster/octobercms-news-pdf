@@ -22,12 +22,12 @@ class Plugin extends PluginBase
             'description' => 'timfoerster.newspdf::lang.plugin.description',
             'author'      => 'TimFoerster',
             'icon'        => 'icon-file-pdf',
+            'homepage'    => 'https://github.com/TimFoerster/octobercms-news-pdf'
         ];
     }
 
     public function boot()
     {
-
         // extend Posts
         Posts::extend(function($model) {
             $model->hasOne['newsPdf'] = ['TimFoerster\NewsPdf\Models\NewsPdf', 'key' => 'post_id'];
@@ -39,7 +39,7 @@ class Plugin extends PluginBase
 
             $model = NewsPdf::byNews($news->id)->first();
 
-            if($model === null) {
+            if ($model === null) {
                 return ;
             };
 
@@ -54,10 +54,8 @@ class Plugin extends PluginBase
             $file = new File;
             $file->fromFile($path);
 
-
             $news->pdf()->add($file);
         });
-
 
         // Extend all backend form usage
         Event::listen('backend.form.extendFields', function($widget) {
@@ -73,7 +71,7 @@ class Plugin extends PluginBase
             }
 
             // Attach relation
-            if($widget->context == 'create') {
+            if ($widget->context == 'create') {
                 $widget->model->newsPdf = new NewsPdf();
             } elseif ($widget->context == 'update') {
                 $widget->model->newsPdf = NewsPdf::byNews($widget->model->id)->get();
@@ -86,7 +84,7 @@ class Plugin extends PluginBase
                     'comment' => trans('timfoerster.newspdf::lang.fields.template_code.comment'),
                     'type'    => 'dropdown',
                     'options' => \Renatio\DynamicPDF\Models\Template::lists('title','code'),
-                    'tab' => trans('timfoerster.newspdf::lang.tab')
+                    'tab'     => trans('timfoerster.newspdf::lang.tab')
                 ]
             ], 'primary');
 
@@ -102,7 +100,5 @@ class Plugin extends PluginBase
                 </a>
             ';
         });
-
-
     }
 }
