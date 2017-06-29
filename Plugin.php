@@ -81,6 +81,27 @@ class Plugin extends PluginBase
             } elseif ($widget->context == 'update') {
                 $widget->model->newsPdf = NewsPdf::byNews($widget->model->id)->get();
             }
+            // Remove a Surname field
+            $widget->removeField('introductory');
+            $widget->removeField('content');
+
+            $toolbarButtons = "fullscreen|bold|italic|underline|strikeThrough|subscript|superscript|fontFamily|fontSize|||color|emoticons|inlineStyle|paragraphStyle|||paragraphFormat|align|formatOL|formatUL|outdent|indent|quote|insertHR|-|insertLink|insertImage|insertTable|undo|redo|clearFormatting|selectAll|html";
+            // Add an extra birthday field
+
+            $widget-> addTabFields([
+                'introductory' => [
+                    'tab'   => 'indikator.news::lang.form.introductory',
+                    'type'    => 'richeditor',
+                    'toolbarButtons' => $toolbarButtons,
+                    'size' => 'large',
+                ],
+                'content' => [
+                    'tab'   => 'indikator.news::lang.form.content',
+                    'type'    => 'richeditor',
+                    'toolbarButtons' => $toolbarButtons,
+                    'size' => 'giant',
+                ]
+            ]);
 
             // Add extra field
             $widget->addFields([
