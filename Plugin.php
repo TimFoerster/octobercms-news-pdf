@@ -35,8 +35,12 @@ class Plugin extends PluginBase
     {
         // extend Posts
         Posts::extend(function($model) {
-            $model->hasOne['newsPdf'] = ['TimFoerster\NewsPdf\Models\NewsPdf', 'key' => 'post_id'];
+            $model->hasOne['newsPdf'] = ['TimFoerster\NewsPdf\Models\NewsPdf', 'key' => 'post_id', 'otherKey' => 'id', 'default' => true];
             $model->attachOne['pdf'] = ['System\Models\File'];
+
+            $model->bindEvent('model.afterCreate', function() use ($model) {
+                $model->newsPdf->post_id = $model->id;
+            });
         });
 
         //Listen to saved event to generate new pdf
@@ -80,13 +84,18 @@ class Plugin extends PluginBase
                 $widget->model->newsPdf = new NewsPdf();
             } elseif ($widget->context == 'update') {
                 $widget->model->newsPdf = NewsPdf::byNews($widget->model->id)->get();
+
+                // To prevent errors, attach new model if it's not found
+                if($widget->model->newsPdf === null) {
+                    $widget->model->newsPdf = new NewsPdf();
+                }
             }
-            // Remove a Surname field
+
+            // Replace introductory and content field with a custom toolbar.
             $widget->removeField('introductory');
             $widget->removeField('content');
 
             $toolbarButtons = "fullscreen|bold|italic|underline|strikeThrough|subscript|superscript|fontFamily|fontSize|||color|emoticons|inlineStyle|paragraphStyle|||paragraphFormat|align|formatOL|formatUL|outdent|indent|quote|insertHR|-|insertLink|insertImage|insertTable|undo|redo|clearFormatting|selectAll|html";
-            // Add an extra birthday field
 
             $widget-> addTabFields([
                 'introductory' => [
@@ -103,7 +112,7 @@ class Plugin extends PluginBase
                 ]
             ]);
 
-            // Add extra field
+            // Add template_code field
             $widget->addFields([
                 'newsPdf[template_code]' => [
                     'label'   => trans('timfoerster.newspdf::lang.fields.template_code.label'),
