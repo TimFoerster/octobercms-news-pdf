@@ -83,7 +83,6 @@ class Plugin extends PluginBase
             if ($widget->context == 'create') {
                 $widget->model->newsPdf = new NewsPdf();
             } elseif ($widget->context == 'update') {
-                $widget->model->newsPdf = NewsPdf::byNews($widget->model->id)->get();
 
                 // To prevent errors, attach new model if it's not found
                 if($widget->model->newsPdf === null) {
