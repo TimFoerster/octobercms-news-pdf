@@ -12,3 +12,5 @@
     - Fixing a bug with relation that sometimes id is not set
     - table_update_timfoerster_newspdf_newspdf_id_fix1.php
     - table_update_timfoerster_newspdf_newspdf_id_fix2.php
+1.0.7:
+    - Support for newsletter copy/cloning

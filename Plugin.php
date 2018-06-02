@@ -39,8 +39,16 @@ class Plugin extends PluginBase
             $model->attachOne['pdf'] = ['System\Models\File'];
 
             $model->bindEvent('model.afterCreate', function() use ($model) {
-                $model->newsPdf->post_id = $model->id;
+                $model->newsPdf()->post_id = $model->id;
             });
+        });
+
+        // listen to duplicate event
+        Event::listen('indikator.news.posts.duplicate', function(&$clone, $post) {
+            $newsPdf = new NewsPdf();
+            $newsPdf->post_id = $clone->id;
+            $newsPdf->template_code = $post->template_code;
+            $newsPdf->save();
         });
 
         //Listen to saved event to generate new pdf
