@@ -14,3 +14,5 @@
     - table_update_timfoerster_newspdf_newspdf_id_fix2.php
 1.0.7:
     - Support for newsletter copy/cloning
+1.0.8
+    - Supports custom newsletter email content

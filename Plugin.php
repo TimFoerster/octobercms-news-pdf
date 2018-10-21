@@ -101,6 +101,9 @@ class Plugin extends PluginBase
             // Replace introductory and content field with a custom toolbar.
             $widget->removeField('introductory');
             $widget->removeField('content');
+            $widget->removeField('enable_newsletter_content');
+            $widget->removeField('newsletter_content');
+
 
             $toolbarButtons = "fullscreen|bold|italic|underline|strikeThrough|subscript|superscript|fontFamily|fontSize|||color|emoticons|inlineStyle|paragraphStyle|||paragraphFormat|align|formatOL|formatUL|outdent|indent|quote|insertHR|-|insertLink|insertImage|insertTable|undo|redo|clearFormatting|selectAll|html";
 
@@ -116,6 +119,22 @@ class Plugin extends PluginBase
                     'type'    => 'richeditor',
                     'toolbarButtons' => $toolbarButtons,
                     'size' => 'giant',
+                ],
+                'enable_newsletter_content' => [
+                    'tab'   => 'indikator.news::lang.form.newsletter_content_tab',
+                    'label' => 'indikator.news::lang.form.enable_newsletter_content',
+                    'comment' => 'indikator.news::lang.form.enable_newsletter_content_description',
+                    'type'    => 'switch',
+                    'default' => false,
+                    'context' => 'update',
+                ],
+                'newsletter_content' => [
+                    'tab'   => 'indikator.news::lang.form.newsletter_content_tab',
+                    'label' => 'indikator.news::lang.form.newsletter_content',
+                    'type'    => 'richeditor',
+                    'toolbarButtons' => $toolbarButtons,
+                    'size' => 'giant',
+                    'context' => 'update'
                 ]
             ]);
 
